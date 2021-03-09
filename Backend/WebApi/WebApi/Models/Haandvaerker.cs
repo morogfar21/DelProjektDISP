@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace F20ITONK.ASPNETCore.MicroService.ClassLib.Models
+namespace WebApi.Models
 {
-    public partial class Haandvaerker
+    public class Haandvaerker
     {
         public Haandvaerker()
         {
