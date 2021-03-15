@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj": {}
+    "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj": {
+    "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj",
-        "packagesPath": "C:\\Users\\cendi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\obj\\",
+        "projectPath": "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj",
+        "packagesPath": "C:\\Users\\Emil\\.nuget\\packages\\",
+        "outputPath": "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\cendi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Emil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,6 +48,10 @@
               "target": "Package",
               "version": "[5.0.4, )"
             },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.10.13, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.1.0, )"
@@ -78,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
