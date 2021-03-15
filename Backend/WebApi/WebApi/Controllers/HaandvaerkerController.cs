@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WebApi.DB;
 using WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,63 +17,141 @@ namespace WebApi.Controllers
     public class HaandvaerkerController : ControllerBase
     {
         private readonly DbContext _context;
-        public HaandvaerkerController(DbContext context)
+        private readonly IServiceProvider _serviceProvider;
+        public HaandvaerkerController(DbContext context, IServiceProvider serviceProvider)
         {
             _context = context;
-        }
-
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            _serviceProvider = serviceProvider;
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        [HttpGet("byId")]
+        public async Task<ActionResult> GetbyID([FromQuery]int id)
         {
-            var handvaerker = await _context.FindAsync(id.GetType());
-
-            if (handvaerker == null)
+            if (!ModelState.IsValid)
             {
                 return NotFound();
             }
+            using (var context = new dbContext(
+                _serviceProvider.GetRequiredService<
+                    DbContextOptions<dbContext>>()))
+            {
+                var hv = context.Haandvaerkers.Find(id);
+                if (hv == null)
+                {
+                    return NotFound();
+                }
 
-            return (ActionResult)handvaerker;
+                return Ok(hv);
+            }
+        }
+
+        [HttpGet("GetallHandvaerker")]
+        public async Task<IActionResult> GetAll()
+        {
+            using (var context = new dbContext(
+                _serviceProvider.GetRequiredService<
+                    DbContextOptions<dbContext>>()))
+            {
+                var hv = await context.Haandvaerkers.ToListAsync();
+                if (hv == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(hv);
+            }
         }
 
         // POST api/<ValuesController>
         [HttpPost]
-        public async Task<ActionResult<Haandvaerker>> PostHaandvaerker(Haandvaerker haandvaerker)
+        public async Task<ActionResult<Haandvaerker>> PostHaandvaerker([FromQuery]int haandvaerkerId, [FromQuery]string hvEfternavn,
+            [FromQuery] string hvFagomraade, [FromQuery] string hvFornavn)
         {
-            _context.Add(haandvaerker);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction($"GetHaandvaerker", new {id = haandvaerker.HaandvaerkerId},
-                haandvaerker);
-        }
-
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Haandvaerker>> DeleteHaandvaerker(int id)
-        {
-            var haandvaerker = await _context.FindAsync<Haandvaerker>(id);
-            if (haandvaerker == null)
+            if (!ModelState.IsValid)
             {
                 return NotFound();
             }
 
-            _context.Remove(haandvaerker);
-            await _context.SaveChangesAsync();
+            using (var context = new dbContext(
+                _serviceProvider.GetRequiredService<
+                    DbContextOptions<dbContext>>()))
+            {
+                var haandvaerker = new Haandvaerker();
+                haandvaerker.HaandvaerkerId = haandvaerkerId;
+                haandvaerker.HVEfternavn = hvEfternavn;
+                haandvaerker.HVFagomraade = hvFagomraade;
+                haandvaerker.HVFornavn = hvFornavn;
 
-            return haandvaerker;
+                //context.Database.ExecuteSqlRaw("USE Haandvaerker");
+                //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker ON;");
+                context.Database.ExecuteSqlRaw("USE Haandvaerker;" +
+                                               "SET IDENTITY_INSERT Haandvaerker ON; " +
+                "Insert into Haandvaerker Values( @HVAnsaettelsedato , @HVEfternavn, @HVFagomraade, @HVFornavn)",
+                //new SqlParameter("HaandvaerkerId", haandvaerkerId),
+                new SqlParameter("HVAnsaettelsedato", DateTime.Now),
+                new SqlParameter("HVEfternavn", hvEfternavn),
+                new SqlParameter("HVFagomraade", hvFagomraade),
+                new SqlParameter("hvFornavn", hvFornavn)
+                );
+                
+                //context.Haandvaerkers.Add(haandvaerker);
+
+                await context.SaveChangesAsync();
+                //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker OFF;");
+
+                return CreatedAtAction($"GetHaandvaerker",
+                    haandvaerker);
+            }
+        }
+
+        // PUT api/<ValuesController>/5
+        [HttpPut("ChangeFagområde")]
+        public async Task<IActionResult> Put([FromQuery] int id, [FromQuery]string fagomraade)
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+            using (var context = new dbContext(
+                _serviceProvider.GetRequiredService<
+                    DbContextOptions<dbContext>>()))
+            {
+                var hv = context.Haandvaerkers.Find(id);
+                if (hv == null)
+                {
+                    return NotFound();
+                }
+
+                hv.HVFagomraade = fagomraade;
+                context.Update(hv);
+                await context.SaveChangesAsync();
+                return Ok("Changed Haandvaerker= " + hv.HVFornavn + ", " + hv.HVFagomraade + ", ID = " + hv.HaandvaerkerId);
+            }
+        }
+
+        // DELETE api/<ValuesController>/5
+        [HttpDelete("ByID")]
+        public async Task<ActionResult<Haandvaerker>> DeleteHaandvaerker([FromQuery]int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+            using (var context = new dbContext(
+                _serviceProvider.GetRequiredService<
+                    DbContextOptions<dbContext>>()))
+            {
+                var hv = context.Haandvaerkers.Find(id);
+                if (hv == null)
+                {
+                    return NotFound();
+                }
+
+                context.Remove(hv);
+                await context.SaveChangesAsync();
+                return Ok("Deleted Haandvaerker= " + hv.HVFornavn +  ", " + hv.HVEfternavn + ", ID = " + hv.HaandvaerkerId);
+            }
         }
     }
 }

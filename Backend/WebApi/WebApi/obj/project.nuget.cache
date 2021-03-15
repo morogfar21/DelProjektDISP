@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "70fUhx0tIcM1UdjNcXIe24uMtYdd2BIhgU8k+SxZYjjB3sxTbuG1t6nwLaN82nzOhBg4nBTr1NPi00OBduu9Ow==",
+  "dgSpecHash": "sO73kGW6dtTkS+pkuJrGEhQbUUct4f3TKROHXWuahreA731+rVM5VUZheB8N6G1W3C0mktz99CNdrFTsMzAQTw==",
   "success": true,
   "projectFilePath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\cendi\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.4\\microsoft.entityframeworkcore.5.0.4.nupkg.sha512",
     "C:\\Users\\cendi\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.4\\microsoft.entityframeworkcore.abstractions.5.0.4.nupkg.sha512",
     "C:\\Users\\cendi\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.4\\microsoft.entityframeworkcore.analyzers.5.0.4.nupkg.sha512",
+    "C:\\Users\\cendi\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\5.0.4\\microsoft.entityframeworkcore.inmemory.5.0.4.nupkg.sha512",
     "C:\\Users\\cendi\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.4\\microsoft.entityframeworkcore.relational.5.0.4.nupkg.sha512",
     "C:\\Users\\cendi\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.4\\microsoft.entityframeworkcore.sqlserver.5.0.4.nupkg.sha512",
     "C:\\Users\\cendi\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

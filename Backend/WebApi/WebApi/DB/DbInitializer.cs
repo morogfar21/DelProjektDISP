@@ -1,74 +1,134 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using WebApi.Models;
 
 namespace WebApi.DB
 {
     public static class DbInitializer
     {
-        public static void Initialize(dbContext context)
+        public static void Initialize(IServiceProvider serviceProvider)
         {
-            //if (context == null)
-            //{
-            //    Console.WriteLine("No context available: ", context);
-            //}
+            //var options = new DbContextOptionsBuilder<dbContext>()
+            //    .UseInMemoryDatabase(databaseName: "Haandvaerker")
+            //    .Options;
 
-            //context.Database.EnsureCreated();
+            using (var context = new dbContext(
+                serviceProvider.GetRequiredService<
+                    DbContextOptions<dbContext>>()))
+            {
+                // Look for any movies.
+                if (context.Haandvaerkers.Any())
+                {
+                    return;   // DB has been seeded
+                }
 
 
-            //var handvaerker = new Haandvaerker[]
-            //{
-            //    new Haandvaerker{HVAnsaettelsedato = DateTime.Now, HVEfternavn = "Lund", HVFagomraade = "VVS", HVFornavn = "Mads", HaandvaerkerId = 1, Vaerktoejskasse = new HashSet<Vaerktoejskasse>()},
-            //    new Haandvaerker{HVAnsaettelsedato = DateTime.Today, HVEfternavn = "Seb", HVFagomraade = "Tømrer", HVFornavn = "Emil", HaandvaerkerId = 2, Vaerktoejskasse = new HashSet<Vaerktoejskasse>()},
-            //    new Haandvaerker{HVAnsaettelsedato = DateTime.Today, HVEfternavn = "Knullerup", HVFagomraade = "VVS", HVFornavn = "Sebastian", HaandvaerkerId = 3, Vaerktoejskasse = new HashSet<Vaerktoejskasse>()}
-            //};
-            //foreach (var haandvaerker in handvaerker)
-            //{
-            //    context.Haandvaerkers.Add(haandvaerker);
-            //}
+                var logresult = context.Database.EnsureCreated();
+                Console.WriteLine("DB result: " + logresult);
+                context.Database.ExecuteSqlRaw("USE Haandvaerker");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker ON;");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Vaerktoej ON;");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Vaerktoejskasse ON;");
+                //context.Database.CommitTransactionAsync();
 
-            //context.SaveChanges();
+                context.Haandvaerkers.AddRange(
 
-            //var varktoej = new Vaerktoej[]
-            //{
-            //    new Vaerktoej{LiggerIvtk = 1, LiggerIvtkNavigation = new Vaerktoejskasse(), VTAnskaffet = DateTime.Now, VTFabrikat = "Bahco", VTId = 1,
-            //        VTModel = "Veliro", VTSerienr = "123541", VTType = "Hammer"},
-            //    new Vaerktoej{LiggerIvtk = 2, LiggerIvtkNavigation = new Vaerktoejskasse(), VTAnskaffet = DateTime.Today, VTFabrikat = "Makita", VTId = 1,
-            //    VTModel = "Bold", VTSerienr = "101011", VTType = "Skruetrækker"},
-            //    new Vaerktoej{LiggerIvtk = 3, LiggerIvtkNavigation = new Vaerktoejskasse(), VTAnskaffet = DateTime.Today, VTFabrikat = "DeWalt", VTId = 1,
-            //        VTModel = "Tough", VTSerienr = "166211", VTType = "Boremaskine"}
-            //};
-            //foreach (var v in varktoej)
-            //{
-            //    context.Vaerktoejs.Add(v);
-            //}
+                    new Haandvaerker
+                    {
+                        HVAnsaettelsedato = DateTime.Now,
+                        HVEfternavn = "Lund",
+                        HVFagomraade = "VVS",
+                        HVFornavn = "Mads"
+                    },
+                    new Haandvaerker
+                    {
+                        HVAnsaettelsedato = DateTime.Today,
+                        HVEfternavn = "Seb",
+                        HVFagomraade = "Tømrer",
+                        HVFornavn = "Emil"
+                    },
+                    new Haandvaerker
+                    {
+                        HVAnsaettelsedato = DateTime.Today,
+                        HVEfternavn = "Knullerup",
+                        HVFagomraade = "VVS",
+                        HVFornavn = "Sebastian"
+                    });
+                
+                context.SaveChanges();
 
-            //context.SaveChanges();
+                context.Vaerktoejs.AddRange(
 
-            //var kasse = new Vaerktoejskasse[]
-            //{
-            //    new Vaerktoejskasse
-            //    {
-            //        EjesAfNavigation = new Haandvaerker(), Vaerktoej = new HashSet<Vaerktoej>(), VTKAnskaffet = DateTime.Today, VTKEjesAf = 1,
-            //        VTKFabrikat = "Bahco", VTKFarve = "Gul", VTKId = 1, VTKModel = "Large", VTKSerienummer = "412121"
-            //    },
-            //    new Vaerktoejskasse
-            //    {
-            //        EjesAfNavigation = new Haandvaerker(), Vaerktoej = new HashSet<Vaerktoej>(), VTKAnskaffet = DateTime.Now, VTKEjesAf = 2,
-            //        VTKFabrikat = "Makita", VTKFarve = "Rød", VTKId = 1, VTKModel = "Medium", VTKSerienummer = "555121"
-            //    },
-            //    new Vaerktoejskasse
-            //    {
-            //        EjesAfNavigation = new Haandvaerker(), Vaerktoej = new HashSet<Vaerktoej>(), VTKAnskaffet = DateTime.Today, VTKEjesAf = 3,
-            //        VTKFabrikat = "Milwaukee", VTKFarve = "Rød", VTKId = 1, VTKModel = "Small", VTKSerienummer = "81900"
-            //    }
-            //};
-            //foreach (var k in kasse)
-            //{
-            //    context.Vaerktoejskasses.Add(k);
-            //}
+                    new Vaerktoej
+                    {
+                        LiggerIvtk = 1,
+                        VTAnskaffet = DateTime.Now,
+                        VTFabrikat = "Bahco",
+                        VTModel = "Veliro",
+                        VTSerienr = "123541",
+                        VTType = "Hammer"
+                    },
+                    new Vaerktoej
+                    {
+                        LiggerIvtk = 2,
+                        VTAnskaffet = DateTime.Today,
+                        VTFabrikat = "Makita",
+                        VTModel = "Bold",
+                        VTSerienr = "101011",
+                        VTType = "Skruetrækker"
+                    },
+                    new Vaerktoej
+                    {
+                        LiggerIvtk = 3,
+                        VTAnskaffet = DateTime.Today,
+                        VTFabrikat = "DeWalt",
+                        VTModel = "Tough",
+                        VTSerienr = "166211",
+                        VTType = "Boremaskine"
+                    });
 
-            //context.SaveChanges();
+                context.SaveChanges();
+
+                context.Vaerktoejskasses.AddRange(
+                    new Vaerktoejskasse
+                    {
+                        VTKAnskaffet = DateTime.Today,
+                        VTKEjesAf = 1,
+                        VTKFabrikat = "Bahco",
+                        VTKFarve = "Gul",
+                        VTKModel = "Large",
+                        VTKSerienummer = "412121"
+                    },
+                    new Vaerktoejskasse
+                    {
+                        VTKAnskaffet = DateTime.Now,
+                        VTKEjesAf = 2,
+                        VTKFabrikat = "Makita",
+                        VTKFarve = "Rød",
+                        VTKModel = "Medium",
+                        VTKSerienummer = "555121"
+                    },
+                    new Vaerktoejskasse
+                    {
+                        VTKAnskaffet = DateTime.Today,
+                        VTKEjesAf = 3,
+                        VTKFabrikat = "Milwaukee",
+                        VTKFarve = "Rød",
+                        VTKModel = "Small",
+                        VTKSerienummer = "81900"
+                    }
+                );
+
+                context.SaveChanges();
+
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker.Haandvaerker OFF;");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker.Vaerktoej OFF;");
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker.Vaerktoejskasse OFF;");
+                //context.Database.CommitTransaction();
+
+            }
         }
     }
 }

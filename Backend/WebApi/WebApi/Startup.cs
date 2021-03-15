@@ -32,6 +32,7 @@ namespace WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddScoped<DbContext, dbContext>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

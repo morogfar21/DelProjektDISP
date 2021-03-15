@@ -26,6 +26,7 @@
       "WebApi/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "5.0.4",
+          "Microsoft.EntityFrameworkCore.InMemory": "5.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.10.13",
           "Swashbuckle.AspNetCore": "6.1.0",
@@ -448,6 +449,20 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/5.0.4": {},
+      "Microsoft.EntityFrameworkCore.InMemory/5.0.4": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.4"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "assemblyVersion": "5.0.4.0",
+            "fileVersion": "5.0.421.11803"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/5.0.4": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.4",
@@ -3105,6 +3120,13 @@
       "sha512": "sha512-z8OMwlXcUZJCArcDdhR0NRkmS0UyNg08l1LXPZCgYqjBeW8RvNXshH3H5ru/7IOVpyOfKrG5Q3nsgdD18OFG/g==",
       "path": "microsoft.entityframeworkcore.analyzers/5.0.4",
       "hashPath": "microsoft.entityframeworkcore.analyzers.5.0.4.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/5.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-S5/SMwue8whhHgLlfNvBGb+9Xv5eP5vk7B92fs1sLBrE2+FbsY+kfQZWGCn0RIdW/pBxzzTFPRuzvSUxZqrggw==",
+      "path": "microsoft.entityframeworkcore.inmemory/5.0.4",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.5.0.4.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/5.0.4": {
       "type": "package",
