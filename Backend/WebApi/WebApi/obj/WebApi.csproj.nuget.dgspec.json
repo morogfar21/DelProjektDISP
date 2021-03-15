@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj": {}
+    "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj": {
+    "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\WebApi.csproj",
-        "packagesPath": "C:\\Users\\Emil\\.nuget\\packages\\",
-        "outputPath": "E:\\Skole\\7.semester\\DISP\\DelProjektDISP\\Backend\\WebApi\\WebApi\\obj\\",
+        "projectPath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\WebApi.csproj",
+        "packagesPath": "C:\\Users\\cendi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Backend\\WebApi\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Emil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cendi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -79,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

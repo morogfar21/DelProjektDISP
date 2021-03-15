@@ -14,12 +14,12 @@ namespace WebApi.DB
         public DbSet<Vaerktoej> Vaerktoejs { get; set; }
         public DbSet<Vaerktoejskasse> Vaerktoejskasses { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Haandvaerker>().ToTable("Haandvaerker");
-            modelBuilder.Entity<Vaerktoej>().ToTable("Vaerktoej");
-            modelBuilder.Entity<Vaerktoejskasse>().ToTable("Vaerktoejskasse");
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Haandvaerker>().ToTable("Haandvaerker");
+        //    modelBuilder.Entity<Vaerktoej>().ToTable("Vaerktoej");
+        //    modelBuilder.Entity<Vaerktoejskasse>().ToTable("Vaerktoejskasse");
+        //}
 
     }
 }

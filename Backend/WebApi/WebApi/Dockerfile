@@ -19,4 +19,7 @@ RUN dotnet publish "WebApi.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Make sure the app binds to port 8080
+#ENV ASPNETCORE_URLS http://*:8080
 ENTRYPOINT ["dotnet", "WebApi.dll"]
