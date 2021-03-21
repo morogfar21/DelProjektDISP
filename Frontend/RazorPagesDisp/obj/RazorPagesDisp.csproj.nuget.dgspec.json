@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SWTDISP\\Delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj": {}
+    "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj": {}
   },
   "projects": {
-    "D:\\SWTDISP\\Delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj": {
+    "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWTDISP\\Delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj",
+        "projectUniqueName": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj",
         "projectName": "RazorPagesDisp",
-        "projectPath": "D:\\SWTDISP\\Delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj",
-        "packagesPath": "C:\\Users\\Sebastian\\.nuget\\packages\\",
-        "outputPath": "D:\\SWTDISP\\Delprojekt\\Frontend\\RazorPagesDisp\\obj\\",
+        "projectPath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj",
+        "packagesPath": "C:\\Users\\cendi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Frontend\\RazorPagesDisp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Sebastian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cendi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

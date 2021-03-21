@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "96suVPZ0ruCf3xONcd0lm/ACbnq0x44r/GZMoHZtSnSUsgKMpPSMuOTwTB/Xv91BaVIMW0H4z7q70qMSxsQXtA==",
+  "dgSpecHash": "er4jwdPvNafw3C6ATW5BkhZ/8fbFP8JraDRy9wJO2KFtYxCQSVR6AtIr/ZoDusQ1UlbOS7eRo7dCGXFplStudA==",
   "success": true,
-  "projectFilePath": "D:\\SWTDISP\\Delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj",
+  "projectFilePath": "C:\\Users\\cendi\\Desktop\\DISP\\delprojekt\\Frontend\\RazorPagesDisp\\RazorPagesDisp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Sebastian\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512"
+    "C:\\Users\\cendi\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512"
   ],
   "logs": []
 }

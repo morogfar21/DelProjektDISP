@@ -35,6 +35,11 @@ namespace WebApi
             services.AddScoped<DbContext, dbContext>();
 
             services.AddControllers();
+
+            //services.AddDbContext<F20ITONKASPNETCore31MicroserviceBackendContext>(options =>
+            //        options.UseSqlServer(Configuration.GetConnectionString("F20ITONKASPNETCore31MicroserviceBackendContext")));
+            services.AddDbContext<dbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("F20ITONKASPNETDockerConnection")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
@@ -49,6 +54,11 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
+            }
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<dbContext>();
+                context.Database.Migrate();
             }
 
             app.UseHttpsRedirection();
