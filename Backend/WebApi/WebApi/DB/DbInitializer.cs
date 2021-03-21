@@ -18,11 +18,11 @@ namespace WebApi.DB
                 serviceProvider.GetRequiredService<
                     DbContextOptions<dbContext>>()))
             {
-                // Look for any movies.
-                if (context.Haandvaerkers.Any())
-                {
-                    return;   // DB has been seeded
-                }
+                // Look for any Haandvaerkers.
+                //if (context.Haandvaerkers.Any())
+                //{
+                //    return;   // DB has been seeded
+                //}
 
 
                 var logresult = context.Database.EnsureCreated();

@@ -32,14 +32,14 @@ namespace WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddScoped<DbContext, dbContext>();
+            //services.AddScoped<DbContext, dbContext>();
 
             services.AddControllers();
 
             //services.AddDbContext<F20ITONKASPNETCore31MicroserviceBackendContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("F20ITONKASPNETCore31MicroserviceBackendContext")));
-            services.AddDbContext<dbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("F20ITONKASPNETDockerConnection")));
+            //services.AddDbContext<dbContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("F20ITONKASPNETDockerConnection")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });

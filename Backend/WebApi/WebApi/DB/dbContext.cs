@@ -19,11 +19,11 @@ namespace WebApi.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Haandvaerker>().ToTable("Haandvaerker");
+            //modelBuilder.Entity<Haandvaerker>().ToTable("Haandvaerker");
             modelBuilder.Entity<Haandvaerker>().HasMany(hv => hv.Vaerktoejskasse).WithOne(hv => hv.EjesAfNavigation).HasForeignKey(ow => ow.VTKEjesAf);
-            modelBuilder.Entity<Vaerktoej>().ToTable("Vaerktoej");
+            //modelBuilder.Entity<Vaerktoej>().ToTable("Vaerktoej");
             modelBuilder.Entity<Vaerktoejskasse>().HasMany(vk => vk.Vaerktoej).WithOne(hv => hv.LiggerIvtkNavigation).HasForeignKey(ow => ow.LiggerIvtk);
-            modelBuilder.Entity<Vaerktoejskasse>().ToTable("Vaerktoejskasse");
+            //modelBuilder.Entity<Vaerktoejskasse>().ToTable("Vaerktoejskasse");
         }
 
     }

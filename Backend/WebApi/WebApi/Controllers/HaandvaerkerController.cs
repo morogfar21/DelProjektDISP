@@ -16,9 +16,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class HaandvaerkerController : ControllerBase
     {
-        private readonly DbContext _context;
+        private readonly dbContext _context;
         private readonly IServiceProvider _serviceProvider;
-        public HaandvaerkerController(DbContext context, IServiceProvider serviceProvider)
+        public HaandvaerkerController(dbContext context, IServiceProvider serviceProvider)
         {
             _context = context;
             _serviceProvider = serviceProvider;
@@ -65,44 +65,50 @@ namespace WebApi.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        public async Task<ActionResult<Haandvaerker>> PostHaandvaerker([FromQuery]int haandvaerkerId, [FromQuery]string hvEfternavn,
-            [FromQuery] string hvFagomraade, [FromQuery] string hvFornavn)
+        public async Task<ActionResult<Haandvaerker>> PostHaandvaerker([FromBody] Haandvaerker haandvaerker)
+            //([FromQuery]int haandvaerkerId, [FromQuery]string hvEfternavn,
+            //[FromQuery] string hvFagomraade, [FromQuery] string hvFornavn)
         {
             if (!ModelState.IsValid)
             {
                 return NotFound();
             }
+            await _context.Haandvaerkers.AddAsync(haandvaerker);
+            await _context.SaveChangesAsync();
 
-            using (var context = new dbContext(
-                _serviceProvider.GetRequiredService<
-                    DbContextOptions<dbContext>>()))
-            {
-                var haandvaerker = new Haandvaerker();
-                haandvaerker.HaandvaerkerId = haandvaerkerId;
-                haandvaerker.HVEfternavn = hvEfternavn;
-                haandvaerker.HVFagomraade = hvFagomraade;
-                haandvaerker.HVFornavn = hvFornavn;
+            return CreatedAtAction($"GetHaandvaerker", new {id = haandvaerker.HaandvaerkerId},
+                   haandvaerker);
 
-                //context.Database.ExecuteSqlRaw("USE Haandvaerker");
-                //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker ON;");
-                context.Database.ExecuteSqlRaw("USE Haandvaerker;" +
-                                               "SET IDENTITY_INSERT Haandvaerker ON; " +
-                "Insert into Haandvaerker Values( @HVAnsaettelsedato , @HVEfternavn, @HVFagomraade, @HVFornavn)",
-                //new SqlParameter("HaandvaerkerId", haandvaerkerId),
-                new SqlParameter("HVAnsaettelsedato", DateTime.Now),
-                new SqlParameter("HVEfternavn", hvEfternavn),
-                new SqlParameter("HVFagomraade", hvFagomraade),
-                new SqlParameter("hvFornavn", hvFornavn)
-                );
-                
-                //context.Haandvaerkers.Add(haandvaerker);
+            //using (var context = new dbContext(
+            //    _serviceProvider.GetRequiredService<
+            //        DbContextOptions<dbContext>>()))
+            //{
+            //    var haandvaerker = new Haandvaerker();
+            //    haandvaerker.HaandvaerkerId = haandvaerkerId;
+            //    haandvaerker.HVEfternavn = hvEfternavn;
+            //    haandvaerker.HVFagomraade = hvFagomraade;
+            //    haandvaerker.HVFornavn = hvFornavn;
 
-                await context.SaveChangesAsync();
-                //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker OFF;");
+            //    //context.Database.ExecuteSqlRaw("USE Haandvaerker");
+            //    //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker ON;");
+            //    context.Database.ExecuteSqlRaw("USE Haandvaerker;" +
+            //                                   "SET IDENTITY_INSERT Haandvaerker ON; " +
+            //    "Insert into Haandvaerker Values( @HVAnsaettelsedato , @HVEfternavn, @HVFagomraade, @HVFornavn)",
+            //    //new SqlParameter("HaandvaerkerId", haandvaerkerId),
+            //    new SqlParameter("HVAnsaettelsedato", DateTime.Now),
+            //    new SqlParameter("HVEfternavn", hvEfternavn),
+            //    new SqlParameter("HVFagomraade", hvFagomraade),
+            //    new SqlParameter("hvFornavn", hvFornavn)
+            //    );
 
-                return CreatedAtAction($"GetHaandvaerker",
-                    haandvaerker);
-            }
+            //    //context.Haandvaerkers.Add(haandvaerker);
+
+            //    //await context.SaveChangesAsync();
+            //    //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Haandvaerker OFF;");
+
+            //    return CreatedAtAction($"GetHaandvaerker",
+            //        haandvaerker);
+            //}
         }
 
         // PUT api/<ValuesController>/5
